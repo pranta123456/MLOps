@@ -14,4 +14,4 @@ docker stop
 docker stats
 docker system df
 docker system prune
-docker exec -it /bin/sh
+docker exec -it container_name /bin/sh
