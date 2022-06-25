@@ -1,0 +1,16 @@
+###### Docker Basic Commands ######
+docker version
+docker -v
+docker info
+docker --help
+docker login
+docker images
+docker pull
+docker rmi
+docker ps
+docker run
+docker start
+docker stop
+docker stats
+docker system df
+docker system prune
