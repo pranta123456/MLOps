@@ -1,0 +1,50 @@
+version : "3"
+
+services:
+
+  database:
+    container_name: postgres_container
+    hostname: postgres_database
+    image: postgres
+    volumes:
+      -./volume:/var/lib/postgresql
+    environment:
+      -POSTGRES_DB=postgresdb, postgresdb_dev
+      -POSTGRES_USER=pdas
+      -POSTGRES_PASSWORD=aStrongPassword
+    ports:
+      -54321:5432
+    restart: unless-stopped
+  
+  api:
+    container_name: backend_api
+    hostname: backend_api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      -54322:5000
+    volumes:
+      -./api/src:/usr/src/app
+      -/usr/src/node_modules
+    restart: unless-stopped
+    environment:
+      NODE_ENV= ${API_ENVIRONMENT}
+    depends_on:
+      - database
+  
+  webserver:
+    container_name: webserver_container
+    hostname: web
+    build:
+      context: ./app_server
+      dockerfile: Dockerfile
+    ports:
+      -80:80
+      -443:443
+    volumes:
+      -./app_server/src/test:/usr/share/nginx/html
+    restart: always
+    depends_on:
+      - database
+
