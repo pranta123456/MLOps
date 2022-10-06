@@ -15,3 +15,9 @@ docker stats
 docker system df
 docker system prune
 docker exec -it container_name /bin/sh
+docker-compose up
+docker-compose down
+docker-compose --env-file ./config/.env.dev up
+
+### Docker Compose Example ###
+https://github.com/mike-huls/beersnob_compose
